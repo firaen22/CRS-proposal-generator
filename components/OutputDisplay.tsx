@@ -30,7 +30,7 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
     
     // Sanitize client name for filename usage
     const cleanName = data.client.name.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_');
-    const filename = `${cleanName}_Wealth_Proposal.pdf`;
+    const filename = `${cleanName}_Offshore_Asset_Allocation.pdf`;
 
     // html2pdf Options
     const opt = {
@@ -73,8 +73,8 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
 
   const getRebateString = () => {
     const parts = [];
-    if (data.promo.lumpSum.enabled) parts.push(`一筆過 ${data.promo.lumpSum.percent}%`);
-    if (data.promo.fiveYear.enabled) parts.push(`5年繳 ${data.promo.fiveYear.percent}%`);
+    if (data.promo.lumpSum.enabled) parts.push(`一笔过 ${data.promo.lumpSum.percent}%`);
+    if (data.promo.fiveYear.enabled) parts.push(`5年缴 ${data.promo.fiveYear.percent}%`);
     return parts.length > 0 ? parts.join(", ") : "N/A";
   };
 
@@ -105,23 +105,23 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
 
         {/* Center Node */}
         <circle cx="0" cy="0" r="55" fill="#FFF8DC" stroke="#B8860B" strokeWidth="2" />
-        <text x="0" y="-5" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333" fontFamily="Noto Serif, serif">稅務</text>
-        <text x="0" y="15" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333" fontFamily="Noto Serif, serif">合規</text>
+        <text x="0" y="-5" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333" fontFamily="Noto Serif SC, serif">税务</text>
+        <text x="0" y="15" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#333" fontFamily="Noto Serif SC, serif">合规</text>
 
         {/* Top Node */}
         <circle cx="0" cy="-100" r="42" fill="#212C3C" />
-        <text x="0" y="-105" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans TC, sans-serif">資產</text>
-        <text x="0" y="-85" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans TC, sans-serif">隔離</text>
+        <text x="0" y="-105" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans SC, sans-serif">资产</text>
+        <text x="0" y="-85" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans SC, sans-serif">隔离</text>
 
         {/* Left Node */}
         <circle cx="-86.6" cy="50" r="42" fill="#212C3C" />
-        <text x="-86.6" y="45" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans TC, sans-serif">身份</text>
-        <text x="-86.6" y="65" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans TC, sans-serif">規劃</text>
+        <text x="-86.6" y="45" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans SC, sans-serif">身份</text>
+        <text x="-86.6" y="65" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans SC, sans-serif">规划</text>
 
         {/* Right Node */}
         <circle cx="86.6" cy="50" r="42" fill="#212C3C" />
-        <text x="86.6" y="45" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans TC, sans-serif">流動</text>
-        <text x="86.6" y="65" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans TC, sans-serif">儲備</text>
+        <text x="86.6" y="45" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans SC, sans-serif">流动</text>
+        <text x="86.6" y="65" textAnchor="middle" fontSize="12" fill="white" fontFamily="Noto Sans SC, sans-serif">储备</text>
       </svg>
     </div>
   );
@@ -197,8 +197,8 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
           {/* Header */}
           <div className="border-b-2 border-amber-600 pb-4 mb-8 flex justify-between items-end">
             <div>
-              <h1 className="text-3xl font-bold serif-font text-slate-900">跨境財富保全建議書</h1>
-              <p className="text-slate-500 text-sm mt-1 uppercase tracking-widest">Global Wealth Structuring</p>
+              <h1 className="text-3xl font-bold serif-font text-slate-900">离岸资产配置建议书</h1>
+              <p className="text-slate-500 text-sm mt-1 uppercase tracking-widest">Offshore Asset Allocation</p>
             </div>
             <div className="text-right">
               <div className="text-amber-600 font-bold text-lg">PB</div>
@@ -209,21 +209,21 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
           {/* Client Overview */}
           <section className="mb-8 break-inside-avoid">
             <h2 className="text-xl font-bold text-slate-800 serif-font mb-4 border-l-4 border-amber-500 pl-3">
-              合規概覽: {data.client.name}
+              合规概览: {data.client.name}
             </h2>
             <p className="text-justify leading-relaxed text-slate-700 mb-4">
-              <span className="font-bold">尊貴的 {data.client.name} 閣下</span>，鑒於內地「金稅四期」大數據監管的全面啟動，以及 CRS（共同匯報標準）對海外資產的穿透式交換，傳統的資產持有方式已面臨挑戰。
-              本建議書旨在利用「{data.planName}」搭建合規的資產隔離架構，協助您應對潛在的稅務追徵風險，並實現資產的合法跨境傳承。
+              <span className="font-bold">尊贵的 {data.client.name} 阁下</span>，鉴于内地“金税四期”大数据监管的全面启动，以及 CRS（共同汇报标准）对海外资产的穿透式交换，传统的资产持有方式已面临挑战。
+              本建议书旨在利用“{data.planName}”搭建合规的资产隔离架构，协助您应对潜在的税务追征风险，并实现资产的合法跨境传承。
             </p>
             
             <div className="flex justify-between bg-slate-50 p-4 rounded border border-slate-100">
                <ul className="list-disc list-inside text-slate-700 space-y-1 text-sm">
-                <li>總保費: USD {formatMoney(data.premium.total)}</li>
-                <li>繳費方式: {data.premium.paymentType}</li>
+                <li>总保费: USD {formatMoney(data.premium.total)}</li>
+                <li>缴费方式: {data.premium.paymentType}</li>
               </ul>
               <div className="text-right text-sm text-slate-500">
-                <div>風險對沖: <span className="font-semibold text-green-700">已配置</span></div>
-                <div>資產屬地: <span className="font-semibold text-amber-700">中國香港 (離岸)</span></div>
+                <div>风险对冲: <span className="font-semibold text-green-700">已配置</span></div>
+                <div>资产属地: <span className="font-semibold text-amber-700">中国香港 (离岸)</span></div>
               </div>
             </div>
           </section>
@@ -233,12 +233,12 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r shadow-sm">
                 <div className="flex items-center mb-2">
                   <svg className="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                  <h3 className="text-sm font-bold text-red-800">當前關鍵風險提示 (Key Risk Alerts)</h3>
+                  <h3 className="text-sm font-bold text-red-800">当前关键风险提示 (Key Risk Alerts)</h3>
                 </div>
                 <ul className="text-xs text-red-700 space-y-1 ml-7 list-disc">
-                   <li><span className="font-bold">金稅四期 & CRS:</span> 帳戶資訊自動比對，隱匿資產面臨定性風險及 0.5-5 倍罰款。</li>
-                   <li><span className="font-bold">滯納金風險:</span> 長期未繳稅款將產生<span className="font-bold underline">每年 18%</span> 的滯納金，侵蝕資產本金。</li>
-                   <li><span className="font-bold">身份規劃:</span> 建議儘早配置香港身份 (優才/高才/投資移民)，轉換稅務居民身份以優化稅務空間。</li>
+                   <li><span className="font-bold">金税四期 & CRS:</span> 账户信息自动比对，隐匿资产面临定性风险及 0.5-5 倍罚款。</li>
+                   <li><span className="font-bold">滞纳金风险:</span> 长期未缴税款将产生<span className="font-bold underline">每年 18%</span> 的滞纳金，侵蚀资产本金。</li>
+                   <li><span className="font-bold">身份规划:</span> 建议尽早配置香港身份 (优才/高才/投资移民)，转换税务居民身份以优化税务空间。</li>
                 </ul>
              </div>
           </section>
@@ -268,18 +268,18 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
           {/* Scenario A Table */}
           <section className="mb-8 break-inside-avoid">
             <h2 className="text-xl font-bold text-slate-800 serif-font mb-4 border-l-4 border-amber-500 pl-3">
-              情境 A: 資產隔離與增值 (Asset Isolation)
+              情境 A: 资产隔离与增值 (Asset Isolation)
             </h2>
             <p className="text-sm text-slate-500 mb-4">
-              利用保險架構的法律屬性，實現資產與個人債務風險的有效隔離。身故賠償金在一般情況下不納入內地遺產稅（如有）徵收範圍。
+              利用保险架构的法律属性，实现资产与个人债务风险的有效隔离。身故赔偿金在一般情况下不纳入内地遗产税（如有）征收范围。
             </p>
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="bg-slate-800 text-white">
-                  <th className="py-3 px-4 text-left">保單年度</th>
-                  <th className="py-3 px-4 text-right">退保價值 (流動性)</th>
-                  <th className="py-3 px-4 text-right">身故賠償 (資產傳承)</th>
-                  <th className="py-3 px-4 text-right">總回報率 (%)</th>
+                  <th className="py-3 px-4 text-left">保单年度</th>
+                  <th className="py-3 px-4 text-right">退保价值 (流动性)</th>
+                  <th className="py-3 px-4 text-right">身故赔偿 (资产传承)</th>
+                  <th className="py-3 px-4 text-right">总回报率 (%)</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,18 +308,18 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
           {/* Scenario B Table */}
           <section className="mb-8 break-inside-avoid">
             <h2 className="text-xl font-bold text-slate-800 serif-font mb-4 border-l-4 border-amber-500 pl-3">
-              情境 B: 稅務流動性準備 (Tax Liquidity Reserve)
+              情境 B: 税务流动性准备 (Tax Liquidity Reserve)
             </h2>
             <p className="text-sm text-slate-500 mb-4">
-              針對潛在的稅務補繳需求或突發資金周轉，本計畫提供每年 <span className="font-bold text-slate-900">USD {formatMoney(data.scenarioB.annualWithdrawal)}</span> 的穩定現金流，避免因資金凍結而產生的滯納金風險。
+              针对潜在的税务补缴需求或突发资金周转，本计划提供每年 <span className="font-bold text-slate-900">USD {formatMoney(data.scenarioB.annualWithdrawal)}</span> 的稳定现金流，避免因资金冻结而产生的滞纳金风险。
             </p>
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="bg-slate-800 text-white">
-                  <th className="py-3 px-4 text-left">保單年度</th>
-                  <th className="py-3 px-4 text-right">累計流動性提取</th>
-                  <th className="py-3 px-4 text-right">剩餘儲備價值</th>
-                  <th className="py-3 px-4 text-right">總回報率 (%)</th>
+                  <th className="py-3 px-4 text-left">保单年度</th>
+                  <th className="py-3 px-4 text-right">累计流动性提取</th>
+                  <th className="py-3 px-4 text-right">剩余储备价值</th>
+                  <th className="py-3 px-4 text-right">总回报率 (%)</th>
                 </tr>
               </thead>
               <tbody>
@@ -354,15 +354,15 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
            {/* Promotions */}
            <section className="mb-auto break-inside-avoid">
             <h2 className="text-xl font-bold text-slate-800 serif-font mb-4 border-l-4 border-amber-500 pl-3">
-              限時推廣
+              限时推广
             </h2>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-50 p-4 border-t-2 border-slate-300">
-                 <div className="text-xs text-slate-500 uppercase font-bold mb-1">保費回贈</div>
+                 <div className="text-xs text-slate-500 uppercase font-bold mb-1">保费回赠</div>
                  <div className="text-slate-800 font-medium">{getRebateString()}</div>
               </div>
               <div className="bg-slate-50 p-4 border-t-2 border-slate-300">
-                 <div className="text-xs text-slate-500 uppercase font-bold mb-1">預繳利率 (鎖定美息)</div>
+                 <div className="text-xs text-slate-500 uppercase font-bold mb-1">预缴利率 (锁定美息)</div>
                  <div className="text-slate-800 font-medium">{getPrepayString()} <span className="text-xs text-red-500 block sm:inline mt-1 sm:mt-0">{getPrepayDeadlineString()}</span></div>
               </div>
             </div>
@@ -370,7 +370,7 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ data, onBack }) =>
 
           {/* Footer / Disclaimer */}
           <div className="mt-8 pt-4 border-t border-slate-300 text-[10px] text-slate-500 text-justify break-inside-avoid">
-            <span className="font-bold">合規免責聲明:</span> 本文件僅供參考，不構成稅務法律意見。稅務後果取決於客戶具體情況及當時法律，建議諮詢專業稅務顧問。關於香港身份規劃、CRS申報及金稅四期應對策略，請參閱銀行提供的詳細合規指引。投資涉及風險，過往表現不代表將來結果。
+            <span className="font-bold">合规免责声明:</span> 本文件仅供参考，不构成税务法律意见。税务后果取决于客户具体情况及当时法律，建议咨询专业税务顾问。关于香港身份规划、CRS申报及金税四期应对策略，请参阅银行提供的详细合规指引。投资涉及风险，过往表现不代表将来结果。
           </div>
 
         </div>

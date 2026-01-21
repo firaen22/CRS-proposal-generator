@@ -1,8 +1,8 @@
 import { ProposalData } from "./types";
 
 export const INITIAL_DATA: ProposalData = {
-  client: { name: "陳總 (Mr. Chen)", age: 45 },
-  planName: "跨境資產保全與合規傳承計劃",
+  client: { name: "陈总 (Mr. Chen)", age: 45 },
+  planName: "跨境资产保全与合规传承计划",
   premium: { total: 500000, paymentType: "整付" },
   scenarioA: {
     year10: { surrender: 580000, death: 1200000 },
