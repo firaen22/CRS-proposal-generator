@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Private Bank Proposal Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', 'Noto Sans TC', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6, .serif-font {
+        font-family: 'Noto Serif', 'Noto Sans TC', serif;
+      }
+      
+      /* Print Styles for PDF Generation */
+      @media print {
+        @page {
+          size: A4 portrait;
+          margin: 0 !important; /* Reset margin for library control */
+        }
+        
+        /* Force color printing */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        /* Root Layout Resets */
+        html, body {
+          width: 100% !important;
+          height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background-color: white !important;
+          overflow: visible !important;
+        }
+
+        /* Strict Hiding of UI elements */
+        header, .no-print, button, .hidden-print {
+          display: none !important;
+        }
+
+        /* 
+           Reset all parent containers to allow content to flow across pages.
+           This is critical for preventing "blank PDF" issues caused by overflow:hidden/auto
+           on parent elements (like React root or app wrappers).
+        */
+        #root, main, .print-parent-reset {
+          display: block !important;
+          width: 100% !important;
+          height: auto !important;
+          min-height: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: visible !important;
+        }
+
+        /* 
+           The Paper Container 
+           We allow it to keep its display property (flex) defined in React, 
+           but force dimensions to fill the page.
+        */
+        .print-container {
+          position: relative !important;
+          width: 100% !important;
+          height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background-color: white !important;
+          box-shadow: none !important;
+          border: none !important;
+          left: 0 !important;
+          top: 0 !important;
+          /* Do NOT force display: block here, let React's flex classes handle layout */
+        }
+
+        /* Background Color Fixes */
+        .bg-slate-800, .bg-slate-900 {
+          background-color: #1e293b !important;
+          color: white !important;
+        }
+        .bg-red-50 {
+          background-color: #fef2f2 !important;
+        }
+        .bg-slate-50 {
+          background-color: #f8fafc !important;
+        }
+        
+        /* Text Color Fixes */
+        .text-white { color: white !important; }
+        .text-slate-900 { color: #0f172a !important; }
+        .text-amber-600 { color: #d97706 !important; }
+
+        /* Page Break Logic */
+        table { page-break-inside: auto; }
+        tr { page-break-inside: avoid; page-break-after: auto; }
+        section { page-break-inside: avoid; margin-bottom: 2rem; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900">
+    <div id="root"></div>
+  </body>
+</html>
