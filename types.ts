@@ -26,6 +26,7 @@ export interface ScenarioAData {
 
 export interface ScenarioBData {
   annualWithdrawal: number;
+  withdrawalStartYear: number;
   year10: ScenarioBValue;
   year20: ScenarioBValue;
   year30: ScenarioBValue;

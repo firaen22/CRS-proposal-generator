@@ -8,14 +8,14 @@ interface InputFormProps {
 }
 
 export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }) => {
-  
+
   const handleChange = (section: keyof ProposalData, field: string, value: any, subField?: string) => {
     const newData = { ...data };
     if (subField) {
       // Handle nested objects like scenarioA.year10.surrender or promo.lumpSum.enabled
       (newData[section] as any)[field][subField] = value;
     } else if (typeof (newData[section] as any)[field] === 'object') {
-       // Should not happen with current logic normally
+      // Should not happen with current logic normally
     } else {
       (newData[section] as any)[field] = value;
     }
@@ -42,52 +42,52 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
       </div>
 
       <div className="space-y-8">
-        
+
         {/* Section 1: Basic Info */}
         <section>
           <h3 className="text-sm font-bold text-amber-600 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">Client & Plan</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700">Client Name</label>
-              <input 
-                type="text" 
-                value={data.client.name} 
+              <input
+                type="text"
+                value={data.client.name}
                 onChange={(e) => handleChange('client', 'name', e.target.value)}
                 className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700">Age</label>
-              <input 
-                type="number" 
-                value={data.client.age} 
+              <input
+                type="number"
+                value={data.client.age}
                 onChange={(e) => handleChange('client', 'age', parseInt(e.target.value) || 0)}
                 className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
               />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-slate-700">Plan Name</label>
-              <input 
-                type="text" 
-                value={data.planName} 
-                onChange={(e) => handleChange('planName', '', e.target.value)} 
-                onInput={(e) => onChange({...data, planName: e.currentTarget.value})}
+              <input
+                type="text"
+                value={data.planName}
+                onChange={(e) => handleChange('planName', '', e.target.value)}
+                onInput={(e) => onChange({ ...data, planName: e.currentTarget.value })}
                 className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700">Total Premium ($)</label>
-              <input 
-                type="number" 
-                value={data.premium.total} 
+              <input
+                type="number"
+                value={data.premium.total}
                 onChange={(e) => handleChange('premium', 'total', parseInt(e.target.value) || 0)}
                 className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700">Payment Type</label>
-              <select 
-                value={data.premium.paymentType} 
+              <select
+                value={data.premium.paymentType}
                 onChange={(e) => handleChange('premium', 'paymentType', e.target.value)}
                 className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
               >
@@ -108,8 +108,8 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
                 <span className="w-20 text-sm font-bold text-slate-500 uppercase">{year.replace('year', 'Yr ')}</span>
                 <div className="flex-1">
                   <label className="block text-xs text-slate-500">Surrender Value</label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     value={data.scenarioA[year as keyof typeof data.scenarioA].surrender}
                     onChange={(e) => handleScenarioAChange(year as any, 'surrender', parseInt(e.target.value) || 0)}
                     className="w-full rounded border-slate-200 text-sm bg-white"
@@ -117,8 +117,8 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
                 </div>
                 <div className="flex-1">
                   <label className="block text-xs text-slate-500">Death Benefit</label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     value={data.scenarioA[year as keyof typeof data.scenarioA].death}
                     onChange={(e) => handleScenarioAChange(year as any, 'death', parseInt(e.target.value) || 0)}
                     className="w-full rounded border-slate-200 text-sm bg-white"
@@ -132,32 +132,69 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
         {/* Section 3: Scenario B */}
         <section>
           <h3 className="text-sm font-bold text-amber-600 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">Scenario B: Passive Income</h3>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-slate-700">Annual Withdrawal Amount ($)</label>
-            <input 
-              type="number" 
-              value={data.scenarioB.annualWithdrawal} 
-              onChange={(e) => handleChange('scenarioB', 'annualWithdrawal', parseInt(e.target.value) || 0)}
-              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700">Annual Withdrawal Amount ($)</label>
+              <input
+                type="number"
+                value={data.scenarioB.annualWithdrawal}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value) || 0;
+                  // Recalculate cumulative
+                  const newData = { ...data };
+                  newData.scenarioB.annualWithdrawal = val;
+                  ['year10', 'year20', 'year30', 'year40'].forEach(yearKey => {
+                    const yearNum = parseInt(yearKey.replace('year', ''));
+                    const startYear = newData.scenarioB.withdrawalStartYear;
+                    const yearsActive = yearNum - startYear + 1;
+                    const cumulative = yearsActive > 0 ? val * yearsActive : 0;
+                    newData.scenarioB[yearKey as keyof typeof data.scenarioB].cumulative = cumulative;
+                  });
+                  onChange(newData);
+                }}
+                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700">Start Year (Policy Year)</label>
+              <input
+                type="number"
+                value={data.scenarioB.withdrawalStartYear}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value) || 1;
+                  // Recalculate cumulative
+                  const newData = { ...data };
+                  newData.scenarioB.withdrawalStartYear = val;
+                  ['year10', 'year20', 'year30', 'year40'].forEach(yearKey => {
+                    const yearNum = parseInt(yearKey.replace('year', ''));
+                    const yearsActive = yearNum - val + 1;
+                    const cumulative = yearsActive > 0 ? newData.scenarioB.annualWithdrawal * yearsActive : 0;
+                    newData.scenarioB[yearKey as keyof typeof data.scenarioB].cumulative = cumulative;
+                  });
+                  onChange(newData);
+                }}
+                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm bg-white"
+              />
+            </div>
           </div>
+
           <div className="grid grid-cols-1 gap-4">
             {['year10', 'year20', 'year30', 'year40'].map((year) => (
               <div key={year} className="flex flex-col md:flex-row md:items-center gap-4 p-3 bg-slate-50 rounded-md">
                 <span className="w-20 text-sm font-bold text-slate-500 uppercase">{year.replace('year', 'Yr ')}</span>
                 <div className="flex-1">
-                  <label className="block text-xs text-slate-500">Cumulative Withdrawn</label>
-                  <input 
-                    type="number" 
+                  <label className="block text-xs text-slate-500">Cumulative Withdrawn (Auto)</label>
+                  <input
+                    type="number"
                     value={data.scenarioB[year as keyof typeof data.scenarioB].cumulative}
-                    onChange={(e) => handleScenarioBChange(year as any, 'cumulative', parseInt(e.target.value) || 0)}
-                    className="w-full rounded border-slate-200 text-sm bg-white"
+                    readOnly
+                    className="w-full rounded border-slate-200 text-sm bg-slate-100 text-slate-600 cursor-not-allowed"
                   />
                 </div>
                 <div className="flex-1">
                   <label className="block text-xs text-slate-500">Remaining Value</label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     value={data.scenarioB[year as keyof typeof data.scenarioB].remaining}
                     onChange={(e) => handleScenarioBChange(year as any, 'remaining', parseInt(e.target.value) || 0)}
                     className="w-full rounded border-slate-200 text-sm bg-white"
@@ -172,12 +209,12 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
         <section>
           <h3 className="text-sm font-bold text-amber-600 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">Promotions</h3>
           <div className="space-y-4">
-            
+
             {/* Rebate Offer - Lump Sum */}
             <div className="bg-slate-50 p-4 rounded-md border border-slate-200">
               <div className="flex items-center justify-between mb-2">
                 <label className="flex items-center text-sm font-bold text-slate-700">
-                  <input 
+                  <input
                     type="checkbox"
                     checked={data.promo.lumpSum.enabled}
                     onChange={(e) => handleChange('promo', 'lumpSum', e.target.checked, 'enabled')}
@@ -187,8 +224,8 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
                 </label>
                 {data.promo.lumpSum.enabled && (
                   <div className="flex items-center w-32">
-                    <input 
-                      type="number" 
+                    <input
+                      type="number"
                       value={data.promo.lumpSum.percent}
                       onChange={(e) => handleChange('promo', 'lumpSum', parseFloat(e.target.value), 'percent')}
                       className="w-full rounded-l-md border-slate-300 text-sm text-right bg-white"
@@ -203,7 +240,7 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
             <div className="bg-slate-50 p-4 rounded-md border border-slate-200">
               <div className="flex items-center justify-between mb-2">
                 <label className="flex items-center text-sm font-bold text-slate-700">
-                  <input 
+                  <input
                     type="checkbox"
                     checked={data.promo.fiveYear.enabled}
                     onChange={(e) => handleChange('promo', 'fiveYear', e.target.checked, 'enabled')}
@@ -213,8 +250,8 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
                 </label>
                 {data.promo.fiveYear.enabled && (
                   <div className="flex items-center w-32">
-                    <input 
-                      type="number" 
+                    <input
+                      type="number"
                       value={data.promo.fiveYear.percent}
                       onChange={(e) => handleChange('promo', 'fiveYear', parseFloat(e.target.value), 'percent')}
                       className="w-full rounded-l-md border-slate-300 text-sm text-right bg-white"
@@ -229,7 +266,7 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
             <div className="bg-slate-50 p-4 rounded-md border border-slate-200">
               <div className="flex items-center justify-between mb-4">
                 <label className="flex items-center text-sm font-bold text-slate-700">
-                  <input 
+                  <input
                     type="checkbox"
                     checked={data.promo.prepay.enabled}
                     onChange={(e) => handleChange('promo', 'prepay', e.target.checked, 'enabled')}
@@ -238,14 +275,14 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
                   Prepayment Interest (預繳利率)
                 </label>
               </div>
-              
+
               {data.promo.prepay.enabled && (
                 <div className="grid grid-cols-2 gap-4 pl-6">
                   <div>
                     <label className="block text-xs text-slate-500 mb-1">Interest Rate</label>
                     <div className="flex items-center">
-                      <input 
-                        type="number" 
+                      <input
+                        type="number"
                         value={data.promo.prepay.rate}
                         onChange={(e) => handleChange('promo', 'prepay', parseFloat(e.target.value), 'rate')}
                         className="w-full rounded-l-md border-slate-300 text-sm text-right bg-white"
@@ -256,8 +293,8 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
                   </div>
                   <div>
                     <label className="block text-xs text-slate-500 mb-1">Offer Deadline</label>
-                    <input 
-                      type="date" 
+                    <input
+                      type="date"
                       value={data.promo.prepay.deadline}
                       onChange={(e) => handleChange('promo', 'prepay', e.target.value, 'deadline')}
                       className="w-full rounded-md border-slate-300 text-sm bg-white"

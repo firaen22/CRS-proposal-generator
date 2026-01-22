@@ -11,6 +11,7 @@ export const INITIAL_DATA: ProposalData = {
   },
   scenarioB: {
     annualWithdrawal: 25000,
+    withdrawalStartYear: 6,
     year10: { cumulative: 250000, remaining: 450000 },
     year20: { cumulative: 500000, remaining: 480000 },
     year30: { cumulative: 750000, remaining: 650000 },
