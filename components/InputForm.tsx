@@ -34,6 +34,21 @@ export const InputForm: React.FC<InputFormProps> = ({ data, onChange, onSubmit }
     onChange(newData);
   };
 
+  const updateScenarioBCalculations = (annualAmount: number, startYear: number) => {
+    const newData = { ...data };
+    newData.scenarioB.annualWithdrawal = annualAmount;
+    newData.scenarioB.withdrawalStartYear = startYear;
+
+    ['year10', 'year20', 'year30', 'year40'].forEach(yearKey => {
+      const yearNum = parseInt(yearKey.replace('year', ''));
+      const yearsActive = yearNum - startYear + 1;
+      const cumulative = yearsActive > 0 ? annualAmount * yearsActive : 0;
+      newData.scenarioB[yearKey as keyof typeof data.scenarioB].cumulative = cumulative;
+    });
+
+    onChange(newData);
+  };
+
   return (
     <div className="bg-white shadow-xl rounded-lg p-8 border-t-4 border-amber-600">
       <div className="flex justify-between items-center mb-6">
